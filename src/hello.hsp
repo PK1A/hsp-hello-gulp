@@ -1,0 +1,5 @@
+# template hello(m)
+<h1>Hello, {m.name}!</h1>
+# /template
+
+module.exports = hello;

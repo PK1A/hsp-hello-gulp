@@ -1,0 +1,19 @@
+{
+  "name": "hsp-hello-gulp",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PK1A/hsp-hello-gulp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PK1A/hsp-hello-gulp/issues"
+  },
+  "homepage": "https://github.com/PK1A/hsp-hello-gulp",
+  "devDependencies": {
+    "gulp": "~3.5.6",
+    "gulp-hsp-compiler": "~0.0.1",
+    "gulp-watch": "~0.5.2",
+    "connect": "~2.14.2",
+    "gulp-util": "~2.2.14"
+  }
+}
