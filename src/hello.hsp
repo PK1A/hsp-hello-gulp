@@ -1,5 +1,8 @@
-# template hello(m)
-<h1>Hello, {m.name}!</h1>
+var HelloCtrl = require('./hello.js');
+
+# template hello using ctrl:HelloCtrl
+<h1>Hello, {ctrl.name}!</h1>
+<input model="{ctrl.name}"><button onclick="{ctrl.clear()}">Clear</button>
 # /template
 
 module.exports = hello;

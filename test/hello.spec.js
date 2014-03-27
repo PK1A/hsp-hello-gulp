@@ -1,10 +1,18 @@
-var helloTpl = require('../src/hello.hsp');
+var HelloCtrl = require('../src/hello.js');
 
-describe('Hello World', function() {
+describe('Hello World controller', function() {
 
-    it('should say Hello to the World', function() {
-        var n = helloTpl({name: 'World'});
-        expect(n.node.firstChild.textContent).to.equal('Hello, World!');
+    var ctrl;
+    beforeEach(function(){
+        ctrl = new HelloCtrl();
     });
 
+    it('should have the "World" name by default', function() {
+        expect(ctrl.name).to.equal('World');
+    });
+
+    it('should allow clearing a name', function() {
+        ctrl.clear();
+        expect(ctrl.name).to.equal('');
+    });
 });
