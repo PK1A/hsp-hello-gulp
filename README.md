@@ -1,9 +1,12 @@
 hsp-hello-gulp
 ==============
 
-Sample #space project build with http://gulpjs.com/
+Sample <a href="https://github.com/ariatemplates/hashspace" target="_blank">#space</a> project build with <a href="http://gulpjs.com/" target="_blank">Gulp.js</a>
 
 ## Install
+
+Make sure that you've got node.js installed: http://nodejs.org/download/.
+npm (Node Package Manager) should be installed with node.js. After the installation is complete, run those commands in your favourite terminal:
 
 * `npm install -g gulp`
 * `npm install`
