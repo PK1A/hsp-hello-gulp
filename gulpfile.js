@@ -21,7 +21,7 @@ var karmaCommonConf = {
     frameworks: ['mocha', 'chai', 'commonjs'],
     preprocessors: {
         'src/**/*.hsp': ['hsp', 'commonjs'],
-        'src/**/*.js': ['commonjs'],
+        'src/**/*.js': ['hsptranspile', 'commonjs'],
         'test/**/*.spec.js': ['commonjs'],
         './node_modules/hashspace/hsp/**/*.js': ['commonjs']
     },
@@ -37,13 +37,8 @@ function karmaExit(exitCode) {
 
 gulp.task('default', function () {
     gulp.src('src/**/*.html').pipe(gulp.dest('dist'));
-    gulp.src('src/**/*.hsp')
-        .pipe(hspCompile())
-        .pipe(hspTranspile())
-        .pipe(gulp.dest('dist'));
-    gulp.src('src/**/*.js')
-        .pipe(hspTranspile())
-        .pipe(gulp.dest('dist'));
+    gulp.src('src/**/*.hsp').pipe(hspCompile()).pipe(gulp.dest('dist'));
+    gulp.src('src/**/*.js').pipe(hspTranspile()).pipe(gulp.dest('dist'));
 });
 
 gulp.task('play', function () {
@@ -55,15 +50,10 @@ gulp.task('play', function () {
         files.pipe(gulp.dest('dist'));
     });
     watch({glob: 'src/**/*.hsp'}, function (files) {
-        files
-            .pipe(hspCompile().on('error', gutil.log))
-            .pipe(hspTranspile().on('error', gutil.log))
-            .pipe(gulp.dest('dist'));
+        files.pipe(hspCompile().on('error', gutil.log)).pipe(gulp.dest('dist'));
     });
     watch({glob: 'src/**/*.js'}, function (files) {
-        files
-            .pipe(hspTranspile().on('error', gutil.log))
-            .pipe(gulp.dest('dist'));
+        files.pipe(hspTranspile().on('error', gutil.log)).pipe(gulp.dest('dist'));
     });
 
     gutil.log('Starting WWW server at http://localhost:' + wwwServerPort);
