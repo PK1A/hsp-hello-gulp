@@ -16,7 +16,7 @@
     "gulp-hsp-transpiler": "~0.0.1",
     "gulp-watch": "~0.5.2",
     "connect": "~2.14.2",
-    "karma": "~0.12.1",
+    "karma": "~0.12.15",
     "karma-chrome-launcher": "~0.1.2",
     "karma-mocha": "~0.1.3",
     "karma-commonjs": "~0.0.7",

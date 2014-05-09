@@ -30,11 +30,6 @@ var karmaCommonConf = {
     }
 };
 
-function karmaExit(exitCode) {
-    gutil.log('Karma has exited with ' + exitCode);
-    process.exit(exitCode);
-}
-
 gulp.task('default', function () {
     gulp.src('src/**/*.html').pipe(gulp.dest('dist'));
     gulp.src('src/**/*.hsp').pipe(hspCompile()).pipe(gulp.dest('dist'));
@@ -60,10 +55,10 @@ gulp.task('play', function () {
     http.createServer(connect().use(connect.static('./dist'))).listen(wwwServerPort);
 });
 
-gulp.task('test', function () {
-    karma.start(_.assign({}, karmaCommonConf, {singleRun: true}), karmaExit);
+gulp.task('test', function (done) {
+    karma.start(_.assign({}, karmaCommonConf, {singleRun: true}), done);
 });
 
-gulp.task('tdd', function () {
-    karma.start(_.assign({}, karmaCommonConf), karmaExit);
+gulp.task('tdd', function (done) {
+    karma.start(_.assign({}, karmaCommonConf), done);
 });
