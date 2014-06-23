@@ -12,7 +12,7 @@
   "devDependencies": {
     "gulp": "~3.8.1",
     "gulp-util": "~2.2.14",
-    "gulp-hashspace": "~0.0.1",
+    "gulp-hashspace": "~0.0.2",
     "gulp-watch": "~0.6.8",
     "connect": "~2.14.2",
     "karma": "~0.12.16",
