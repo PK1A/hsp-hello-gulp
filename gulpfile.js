@@ -19,8 +19,8 @@ var karmaCommonConf = {
     ],
     frameworks: ['mocha', 'chai', 'commonjs'],
     preprocessors: {
-        'src/**/*.hsp': ['hsp', 'commonjs'],
-        'src/**/*.js': ['hsptranspile', 'commonjs'],
+        'src/**/*.hsp': ['hsp-compile', 'commonjs'],
+        'src/**/*.js': ['hsp-transpile', 'commonjs'],
         'test/**/*.spec.js': ['commonjs'],
         './node_modules/hashspace/hsp/**/*.js': ['commonjs']
     },
