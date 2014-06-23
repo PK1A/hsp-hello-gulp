@@ -1,8 +1,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var watch = require('gulp-watch');
-var hspCompile = require('gulp-hsp-compiler');
-var hspTranspile = require('gulp-hsp-transpiler');
+var hsp = require('gulp-hashspace');
 var connect = require('connect');
 var http = require('http');
 var karma = require('karma').server;
@@ -32,8 +31,8 @@ var karmaCommonConf = {
 
 gulp.task('default', function () {
     gulp.src('src/**/*.html').pipe(gulp.dest('dist'));
-    gulp.src('src/**/*.hsp').pipe(hspCompile()).pipe(gulp.dest('dist'));
-    gulp.src('src/**/*.js').pipe(hspTranspile()).pipe(gulp.dest('dist'));
+    gulp.src('src/**/*.hsp').pipe(hsp.compile()).pipe(gulp.dest('dist'));
+    gulp.src('src/**/*.js').pipe(hsp.transpile()).pipe(gulp.dest('dist'));
 });
 
 gulp.task('play', function () {
@@ -45,10 +44,10 @@ gulp.task('play', function () {
         files.pipe(gulp.dest('dist'));
     });
     watch({glob: 'src/**/*.hsp'}, function (files) {
-        files.pipe(hspCompile().on('error', gutil.log)).pipe(gulp.dest('dist'));
+        files.pipe(hsp.compile().on('error', gutil.log)).pipe(gulp.dest('dist'));
     });
     watch({glob: 'src/**/*.js'}, function (files) {
-        files.pipe(hspTranspile().on('error', gutil.log)).pipe(gulp.dest('dist'));
+        files.pipe(hsp.transpile().on('error', gutil.log)).pipe(gulp.dest('dist'));
     });
 
     gutil.log('Starting WWW server at http://localhost:' + wwwServerPort);
