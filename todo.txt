@@ -1,0 +1,25 @@
+- add some kind of automated tests on Travis-CI to make sure that this thing actually works
+    - this would be a great excuse to introduce Selenium testing :-)
+
+- make the DOM-based test pass
+    - how to include hashtester / evntgenerator?
+        - jQuery is the problem right now
+            - peer dependency => no, it won't solve the issue :-/
+            - ideas:
+                (1) Change all the references so those are relative, move jQuery to be a peer dependency => this is not enough since we need to take care of the thing in a generated template....
+                (2) Add mapping capability to karma / noder -> but this feels wrong somehow...
+            - questions: what are dependencies of the runtime (in a browser): jQuery, ...
+
+    - we still got a problem about the generated require('hsp/...') in the included template!!!
+        - it is always about the same thing - one root folder (!); possible solutions:
+            - a configuration option
+                - for the required thing
+                - for a reference to the runtime
+        - bahhhh.... transpiler also assumes things: var $set=require("hsp/$set");
+
+- improve
+    - can I use jQuery / other stuff to easily get my hand on the DOM?
+    - what is the added value of the wrapper? like refresh?
+
+- how does it influence folder structure of hsp?
+- are there any other points from the backlog around this area => yes, enter text for example
