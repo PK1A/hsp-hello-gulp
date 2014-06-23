@@ -1,3 +1,6 @@
+[![devDependency Status](https://david-dm.org/PK1A/hsp-hello-gulp/status.png?branch=master)](https://david-dm.org/PK1A/hsp-hello-gulp#info=dependencies)
+[![devDependency Status](https://david-dm.org/PK1A/hsp-hello-gulp/dev-status.png?branch=master)](https://david-dm.org/PK1A/hsp-hello-gulp#info=devDependencies)
+
 hsp-hello-gulp
 ==============
 
