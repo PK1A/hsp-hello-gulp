@@ -1,11 +1,14 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var watch = require('gulp-watch');
+var template = require('gulp-template');
 var hsp = require('gulp-hashspace');
 var connect = require('connect');
 var http = require('http');
 var karma = require('karma').server;
 var _ = require('lodash');
+
+var hspVersion = require('hashspace/package.json').version;
 
 var karmaCommonConf = {
     browsers: ['Chrome'],
@@ -30,7 +33,7 @@ var karmaCommonConf = {
 };
 
 gulp.task('default', function () {
-    gulp.src('src/**/*.html').pipe(gulp.dest('dist'));
+    gulp.src('src/**/index.html').pipe(template({version: hspVersion})).pipe(gulp.dest('dist'));
     gulp.src('src/**/*.hsp').pipe(hsp.compile()).pipe(gulp.dest('dist'));
     gulp.src('src/**/*.js').pipe(hsp.transpile()).pipe(gulp.dest('dist'));
 });
@@ -40,8 +43,8 @@ gulp.task('play', function () {
     var wwwServerPort = 8000;
 
     //observe files for changes
-    watch({glob: 'src/**/*.html'}, function (files) {
-        files.pipe(gulp.dest('dist'));
+    watch({glob: 'src/**/index.html'}, function (files) {
+        files.pipe(template({version: hspVersion})).pipe(gulp.dest('dist'));
     });
     watch({glob: 'src/**/*.hsp'}, function (files) {
         files.pipe(hsp.compile().on('error', gutil.log)).pipe(gulp.dest('dist'));

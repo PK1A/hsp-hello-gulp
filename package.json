@@ -14,6 +14,7 @@
     "gulp-util": "~2.2.14",
     "gulp-hashspace": "~0.0.2",
     "gulp-watch": "~0.6.8",
+    "gulp-template": "~0.1.1"
     "connect": "~2.14.2",
     "karma-chrome-launcher": "~0.1.2",
     "karma-mocha": "~0.1.3",
