@@ -12,14 +12,14 @@
   "devDependencies": {
     "gulp": "~3.8.1",
     "gulp-util": "~2.2.14",
-    "gulp-hashspace": "~0.0.2",
+    "gulp-hashspace": "~0.0.3",
     "gulp-watch": "~0.6.8",
-    "gulp-template": "~0.1.1"
+    "gulp-template": "~0.1.1",
     "connect": "~2.14.2",
     "karma-chrome-launcher": "~0.1.2",
     "karma-mocha": "~0.1.3",
     "karma-commonjs": "~0.0.9",
-    "karma-hashspace": "~0.0.2",
+    "karma-hashspace": "~0.0.1",
     "chai": "~1.9.1",
     "karma-chai": "~0.1.0",
     "lodash": "~2.4.1"

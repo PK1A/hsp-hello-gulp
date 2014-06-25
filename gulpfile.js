@@ -13,8 +13,7 @@ var hspVersion = require('hashspace/package.json').version;
 var karmaCommonConf = {
     browsers: ['Chrome'],
     files: [
-        'src/**/*.hsp',
-        'src/**/*.js',
+        'src/**/*.+(hsp|js)',
         'test/**/*.spec.js',
         './node_modules/hashspace/hsp/*.js',
         './node_modules/hashspace/hsp/rt/**/*.js',
