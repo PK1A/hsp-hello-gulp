@@ -34,8 +34,7 @@ var karmaCommonConf = {
 
 gulp.task('default', function () {
     gulp.src('src/**/index.html').pipe(template({version: hspVersion})).pipe(gulp.dest('dist'));
-    gulp.src('src/**/*.hsp').pipe(hsp.compile()).pipe(gulp.dest('dist'));
-    gulp.src('src/**/*.js').pipe(hsp.transpile()).pipe(gulp.dest('dist'));
+    gulp.src('src/**/*.+(hsp|js)').pipe(hsp.process()).pipe(gulp.dest('dist'));
 });
 
 gulp.task('play', function () {
@@ -46,13 +45,9 @@ gulp.task('play', function () {
     watch({glob: 'src/**/index.html'}, function (files) {
         files.pipe(template({version: hspVersion})).pipe(gulp.dest('dist'));
     });
-    watch({glob: 'src/**/*.hsp'}, function (files) {
-        files.pipe(hsp.compile().on('error', gutil.log)).pipe(gulp.dest('dist'));
+    watch({glob: 'src/**/*.+(hsp|js)'}, function (files) {
+        files.pipe(hsp.process().on('error', gutil.log)).pipe(gulp.dest('dist'));
     });
-    watch({glob: 'src/**/*.js'}, function (files) {
-        files.pipe(hsp.transpile().on('error', gutil.log)).pipe(gulp.dest('dist'));
-    });
-
     gutil.log('Starting WWW server at http://localhost:' + wwwServerPort);
     http.createServer(connect().use(connect.static('./dist'))).listen(wwwServerPort);
 });
