@@ -14,12 +14,9 @@ var karmaCommonConf = {
     browsers: ['Chrome'],
     files: [
         'src/**/*.+(hsp|js)',
-        'test/**/*.spec.js',
-        './node_modules/hashspace/hsp/*.js',
-        './node_modules/hashspace/hsp/rt/**/*.js',
-        './node_modules/hashspace/hsp/gestures/**/*.js'
+        'test/**/*.spec.js'
     ],
-    frameworks: ['mocha', 'chai', 'commonjs'],
+    frameworks: ['mocha', 'chai', 'hsp', 'commonjs'],
     preprocessors: {
         'src/**/*.hsp': ['hsp-compile', 'commonjs'],
         'src/**/*.js': ['hsp-transpile', 'commonjs'],
