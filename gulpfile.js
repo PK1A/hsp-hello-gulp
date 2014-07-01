@@ -5,6 +5,7 @@ var template = require('gulp-template');
 var hsp = require('gulp-hashspace');
 var noder = require('gulp-noder');
 var concat = require('gulp-concat');
+var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 
 var connect = require('connect');
@@ -35,6 +36,12 @@ var karmaCommonConf = {
 
 gulp.task('default', ['package']);
 
+gulp.task('clean', function(){
+    //clean up the destination folder
+    //remember to return a stream here so a subsequent task wait for the clean to end
+    return gulp.src('dist/*.*', {read: false}).pipe(clean());
+});
+
 gulp.task('build', function () {
     gulp.src('src/**/index.html').pipe(template({version: hspVersion})).pipe(gulp.dest('dist'));
     gulp.src('src/**/*.+(hsp|js)').pipe(hsp.process()).pipe(gulp.dest('dist'));
@@ -50,7 +57,7 @@ gulp.task('package', function () {
         .pipe(gulp.dest('dist'));   //copy to the destination folder
 });
 
-gulp.task('play', function () {
+gulp.task('play', ['clean'], function () {
 
     var wwwServerPort = 8000;
 
