@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript" src="http://noder-js.ariatemplates.com/dist/v1.5.0/noder.js"></script>
-    <script type="text/javascript" src="http://hashspace.ariatemplates.com/dist/<%= version %>/hashspace-noder.js"></script>
+    <script type="text/javascript" src="http://noder-js.ariatemplates.com/dist/v<%= noderVersion %>/noder.js"></script>
+    <script type="text/javascript" src="http://hashspace.ariatemplates.com/dist/<%= hspVersion %>/hashspace-noder.js"></script>
     <script type="application/x-noder">
         var main = require('hello.hsp');
         main({name:'World'}).render('out');

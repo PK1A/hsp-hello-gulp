@@ -43,7 +43,10 @@ gulp.task('clean', function(){
 });
 
 gulp.task('build', function () {
-    gulp.src('src/**/index.html').pipe(template({version: hspVersion})).pipe(gulp.dest('dist'));
+    gulp.src('src/**/index.html').pipe(template({
+        hspVersion: hspVersion,
+        noderVersion: noder.version
+    })).pipe(gulp.dest('dist'));
     gulp.src('src/**/*.+(hsp|js)').pipe(hsp.process()).pipe(gulp.dest('dist'));
 });
 
@@ -63,7 +66,10 @@ gulp.task('play', ['clean'], function () {
 
     //observe files for changes
     watch({glob: 'src/**/index.html'}, function (files) {
-        files.pipe(template({version: hspVersion})).pipe(gulp.dest('dist'));
+        files.pipe(template({
+            hspVersion: hspVersion,
+            noderVersion: noder.version
+        })).pipe(gulp.dest('dist'));
     });
     watch({glob: 'src/**/*.+(hsp|js)'}, function (files) {
         files.pipe(hsp.process().on('error', gutil.log)).pipe(gulp.dest('dist'));
