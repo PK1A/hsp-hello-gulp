@@ -23,3 +23,8 @@ npm (Node Package Manager) should be installed with node.js. After the installat
 This sample application comes with a full set of tasks to perform unit testing. Here is the list:
 * `gulp test` - runs all the test once
 * `gulp tdd` - run tests, watch for file changes and re-execute tests on each test
+
+## Package
+
+Finally, you can see how to package your application and prepare it for the production deployment:
+* `gulp package` - this is a default task

@@ -3,8 +3,13 @@ var gutil = require('gulp-util');
 var watch = require('gulp-watch');
 var template = require('gulp-template');
 var hsp = require('gulp-hashspace');
+var noder = require('gulp-noder');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+
 var connect = require('connect');
 var http = require('http');
+
 var karma = require('karma').server;
 var _ = require('lodash');
 
@@ -28,9 +33,21 @@ var karmaCommonConf = {
     }
 };
 
-gulp.task('default', function () {
+gulp.task('default', ['package']);
+
+gulp.task('build', function () {
     gulp.src('src/**/index.html').pipe(template({version: hspVersion})).pipe(gulp.dest('dist'));
     gulp.src('src/**/*.+(hsp|js)').pipe(hsp.process()).pipe(gulp.dest('dist'));
+});
+
+gulp.task('package', function () {
+    gulp.src('src/**/*.+(hsp|js)')
+        .pipe(hsp.process())        //compile and transpile #space files
+        .pipe(noder.package('/src'))//wrap CommonJS so they can be loaded with Noder.js
+        .pipe(concat('all.min.js')) //combine files together
+        .pipe(noder.wrap())         //entire file wrapping needed by Noder.js
+        .pipe(uglify())             //minify
+        .pipe(gulp.dest('dist'));   //copy to the destination folder
 });
 
 gulp.task('play', function () {
