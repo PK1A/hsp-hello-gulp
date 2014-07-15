@@ -14,7 +14,6 @@
     "gulp-util": "~2.2.14",
     "gulp-hashspace": "~0.0.3",
     "gulp-noder": "~0.0.2",
-    "gulp-clean": "~0.3.1",
     "gulp-concat": "~2.2.0",
     "gulp-uglify": "~0.3.1",
     "gulp-watch": "~0.6.8",
@@ -26,6 +25,7 @@
     "karma-hashspace": "~0.0.2",
     "chai": "~1.9.1",
     "karma-chai": "~0.1.0",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "rimraf": "~2.2.8"
   }
 }

@@ -8,6 +8,7 @@ var concat = require('gulp-concat');
 var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 
+var rimraf = require('rimraf');
 var connect = require('connect');
 var http = require('http');
 
@@ -36,10 +37,8 @@ var karmaCommonConf = {
 
 gulp.task('default', ['package']);
 
-gulp.task('clean', function(){
-    //clean up the destination folder
-    //remember to return a stream here so a subsequent task wait for the clean to end
-    return gulp.src('dist/*.*', {read: false}).pipe(clean());
+gulp.task('clean', function (done) {
+    rimraf('dist', done);
 });
 
 gulp.task('build', function () {
