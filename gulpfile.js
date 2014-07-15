@@ -1,11 +1,9 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var watch = require('gulp-watch');
 var template = require('gulp-template');
 var hsp = require('gulp-hashspace');
 var noder = require('gulp-noder');
 var concat = require('gulp-concat');
-var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 
 var rimraf = require('rimraf');
@@ -16,6 +14,11 @@ var karma = require('karma').server;
 var _ = require('lodash');
 
 var hspVersion = require('hashspace/package.json').version;
+
+var PATHS = {
+    'index': 'src/**/index.html',
+    'dynamic': 'src/**/*.+(hsp|js)'
+}
 
 var karmaCommonConf = {
     browsers: ['Chrome'],
@@ -41,16 +44,19 @@ gulp.task('clean', function (done) {
     rimraf('dist', done);
 });
 
-gulp.task('build', function () {
-    gulp.src('src/**/index.html').pipe(template({
+gulp.task('build-index', function(){
+    return gulp.src(PATHS.index).pipe(template({
         hspVersion: hspVersion,
         noderVersion: noder.version
     })).pipe(gulp.dest('dist'));
-    gulp.src('src/**/*.+(hsp|js)').pipe(hsp.process()).pipe(gulp.dest('dist'));
+});
+
+gulp.task('build-dynamic', function () {
+    return gulp.src(PATHS.dynamic).pipe(hsp.process()).pipe(gulp.dest('dist'));
 });
 
 gulp.task('package', function () {
-    gulp.src('src/**/*.+(hsp|js)')
+    return gulp.src(PATHS.dynamic)
         .pipe(hsp.process())        //compile and transpile #space files
         .pipe(noder.package('/src'))//wrap CommonJS so they can be loaded with Noder.js
         .pipe(concat('all.min.js')) //combine files together
@@ -59,20 +65,14 @@ gulp.task('package', function () {
         .pipe(gulp.dest('dist'));   //copy to the destination folder
 });
 
-gulp.task('play', ['clean'], function () {
+gulp.task('play', ['clean', 'build-index', 'build-dynamic'], function () {
 
     var wwwServerPort = 8000;
 
     //observe files for changes
-    watch({glob: 'src/**/index.html'}, function (files) {
-        files.pipe(template({
-            hspVersion: hspVersion,
-            noderVersion: noder.version
-        })).pipe(gulp.dest('dist'));
-    });
-    watch({glob: 'src/**/*.+(hsp|js)'}, function (files) {
-        files.pipe(hsp.process().on('error', gutil.log)).pipe(gulp.dest('dist'));
-    });
+    gulp.watch(PATHS.index, ['build-index']);
+    gulp.watch(PATHS.dynamic, ['build-dynamic']);
+
     gutil.log('Starting WWW server at http://localhost:' + wwwServerPort);
     http.createServer(connect().use(connect.static('./dist'))).listen(wwwServerPort);
 });
