@@ -9,6 +9,7 @@ var uglify = require('gulp-uglify');
 var rimraf = require('rimraf');
 var connect = require('connect');
 var http = require('http');
+var open = require('open');
 
 var karma = require('karma').server;
 var _ = require('lodash');
@@ -75,6 +76,7 @@ gulp.task('play', ['clean', 'build-index', 'build-dynamic'], function () {
 
     gutil.log('Starting WWW server at http://localhost:' + wwwServerPort);
     http.createServer(connect().use(connect.static('./dist'))).listen(wwwServerPort);
+    open('http://localhost:' + wwwServerPort);
 });
 
 gulp.task('test', function (done) {
