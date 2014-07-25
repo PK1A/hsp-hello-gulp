@@ -17,13 +17,13 @@ var hspVersion = require('hashspace/package.json').version;
 
 var PATHS = {
     'index': 'src/**/index.html',
-    'dynamic': 'src/**/*.+(hsp|js)'
+    'dynamic': 'src/**/*.{hsp,js}'
 }
 
 var karmaCommonConf = {
     browsers: ['Chrome'],
     files: [
-        'src/**/*.+(hsp|js)',
+        'src/**/*.{hsp,js}',
         'test/**/*.spec.js'
     ],
     frameworks: ['mocha', 'chai', 'hsp', 'commonjs'],
