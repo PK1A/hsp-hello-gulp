@@ -56,7 +56,7 @@ gulp.task('build-dynamic', function () {
     return gulp.src(PATHS.dynamic).pipe(hsp.process()).pipe(gulp.dest('dist'));
 });
 
-gulp.task('package', function () {
+gulp.task('package', ['clean'], function () {
     return gulp.src(PATHS.dynamic)
         .pipe(hsp.process())        //compile and transpile #space files
         .pipe(noder.package('/src'))//wrap CommonJS so they can be loaded with Noder.js
