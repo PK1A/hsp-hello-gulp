@@ -39,6 +39,16 @@ var karmaCommonConf = {
     }
 };
 
+var breakOnError = true;
+function handleError(err) {
+    gutil.log(err);
+    if (breakOnError) {
+        process.exit(1);
+    } else {
+        this.emit('end');
+    }
+}
+
 gulp.task('default', ['package']);
 
 gulp.task('clean', function (done) {
@@ -46,14 +56,20 @@ gulp.task('clean', function (done) {
 });
 
 gulp.task('build-index', function(){
-    return gulp.src(PATHS.index).pipe(template({
-        hspVersion: hspVersion,
-        noderVersion: noder.version
-    })).pipe(gulp.dest('dist'));
+    return gulp.src(PATHS.index)
+        .pipe(template({
+            hspVersion: hspVersion,
+            noderVersion: noder.version
+        }))
+        .on('error', handleError)
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('build-dynamic', function () {
-    return gulp.src(PATHS.dynamic).pipe(hsp.process()).pipe(gulp.dest('dist'));
+    return gulp.src(PATHS.dynamic)
+        .pipe(hsp.process())
+        .on('error', handleError)
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('package', ['clean'], function () {
@@ -69,6 +85,9 @@ gulp.task('package', ['clean'], function () {
 gulp.task('play', ['build-index', 'build-dynamic'], function () {
 
     var wwwServerPort = 8000;
+
+    //don't stop watching on compilation errors
+    breakOnError = false;
 
     //observe files for changes
     gulp.watch(PATHS.index, ['build-index']);
