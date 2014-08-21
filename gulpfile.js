@@ -66,7 +66,7 @@ gulp.task('package', ['clean'], function () {
         .pipe(gulp.dest('dist'));   //copy to the destination folder
 });
 
-gulp.task('play', ['clean', 'build-index', 'build-dynamic'], function () {
+gulp.task('play', ['build-index', 'build-dynamic'], function () {
 
     var wwwServerPort = 8000;
 
